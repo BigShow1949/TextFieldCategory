@@ -9,7 +9,7 @@
 #import "ViewController.h"
 #import "UITextField+YFExtension.h"
 
-@interface ViewController ()
+@interface ViewController ()<UITextFieldDelegate>
 
 @end
 
@@ -66,8 +66,94 @@
     textfield5.borderStyle = UITextBorderStyleLine;
     textfield5.maxLength = 6;
     [self.view addSubview:textfield5];
+    
+    
+    // 测试
+    CGFloat y6 = CGRectGetMaxY(textfield5.frame)+ 15;
+    UITextField *textfield6 = [[UITextField alloc] initWithFrame:CGRectMake(50, y6, w, h)];
+    textfield6.placeholder = @"测试....";
+    textfield6.delegate = self;
+    textfield6.borderStyle = UITextBorderStyleLine;
+    [self.view addSubview:textfield6];
+
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(textFieldEditChanged:) name:@"UITextFieldTextDidChangeNotification" object:textfield6];
+    
 
 }
+
+
+//#pragma mark - UITextFieldDelegate
+//- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+//    
+//    NSLog(@"text=%@, string=%@", textField.text, string);
+//    NSLog(@"location=%zd, length=%zd", range.location, range.length);
+//    NSString * toBeString = [textField.text stringByReplacingCharactersInRange:range withString:string];
+//    NSLog(@"toBeString = %@", toBeString);
+//
+//    if (toBeString.length > 3) {
+//        return NO;
+//    }
+//    return YES;
+//}
+
+
+
+/*
+ 限制三个字, 输入"中国人"当输入ren的时候, e就输入不了,加入高亮判断
+ */
+-(void)textFieldEditChanged:(NSNotification *)obj{
+    NSInteger kMaxLength = 3;
+    
+    UITextField *textField = (UITextField *)obj.object;
+    NSString *toBeString = textField.text;
+    NSString *lang = [[UITextInputMode currentInputMode] primaryLanguage]; // 键盘输入模式
+    if ([lang isEqualToString:@"zh-Hans"]) { // 简体中文输入，包括简体拼音，健体五笔，简体手写
+        UITextRange *selectedRange = [textField markedTextRange];       //获取高亮部分
+        UITextPosition *position = [textField positionFromPosition:selectedRange.start offset:0];
+
+        if (position) {
+            NSLog(@"高亮的时候不判断, 只有输入到textField的时候才判断");
+        }else {
+            if (toBeString.length > kMaxLength) {
+                textField.text = [toBeString substringToIndex:kMaxLength];
+            }
+        }
+    
+    }else if (toBeString.length > kMaxLength) {
+        // 中文输入法以外的直接对其统计限制即可，不考虑其他语种情况
+        // 最后一个字符输入emoji表情时,显示乱码,改为如下
+        if (toBeString.length > kMaxLength)
+        {
+            NSRange rangeIndex = [toBeString rangeOfComposedCharacterSequenceAtIndex:kMaxLength];
+            if (rangeIndex.length == 1)
+            {
+                textField.text = [toBeString substringToIndex:kMaxLength];
+            }
+            else
+            {
+                NSRange rangeRange = [toBeString rangeOfComposedCharacterSequencesForRange:NSMakeRange(0, kMaxLength)];
+                textField.text = [toBeString substringWithRange:rangeRange];
+            }
+        }
+        
+
+    }
+    
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
