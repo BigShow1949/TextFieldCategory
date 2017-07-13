@@ -9,6 +9,8 @@
 #import "ViewController.h"
 #import "UITextField+YFExtension.h"
 
+#import "ViewControllerB.h"
+
 @interface ViewController ()<UITextFieldDelegate>
 
 @end
@@ -19,6 +21,13 @@
     [super viewDidLoad];
     CGFloat w = 200;
     CGFloat h = 30;
+    
+    UIButton *redBtn = [[UIButton alloc] init];
+    redBtn.frame = CGRectMake(280, 100, 80, 80);
+    [redBtn setTitle:@"click here" forState:UIControlStateNormal];
+    [redBtn addTarget:self action:@selector(redBtnClick) forControlEvents:UIControlEventTouchUpInside];
+    redBtn.backgroundColor = [UIColor redColor];
+    [self.view addSubview:redBtn];
     
     // 附件键盘
     UITextField *textfield1 = [[UITextField alloc] initWithFrame:CGRectMake(50, 30, w, h)];
@@ -64,6 +73,7 @@
     UITextField *textfield5 = [[UITextField alloc] initWithFrame:CGRectMake(50, y5, w, h)];
     textfield5.placeholder = @"最多输入六个字符";
     textfield5.borderStyle = UITextBorderStyleLine;
+    textfield5.keyboardType = UIKeyboardTypeDecimalPad;
     textfield5.maxLength = 6;
     [self.view addSubview:textfield5];
     
@@ -148,6 +158,10 @@
 
 
 
+- (void)redBtnClick {
+    ViewControllerB *vcB = [[ViewControllerB alloc] init];
+    [self presentViewController:vcB animated:YES completion:nil];
+}
 
 
 

@@ -15,6 +15,9 @@
 		183ABD301F171C4400FDC488 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 183ABD2F1F171C4400FDC488 /* Assets.xcassets */; };
 		183ABD331F171C4400FDC488 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 183ABD311F171C4400FDC488 /* LaunchScreen.storyboard */; };
 		183ABD3C1F171D5900FDC488 /* UITextField+YFExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 183ABD3B1F171D5900FDC488 /* UITextField+YFExtension.m */; };
+		18BBF1FD1F17734A006657F9 /* NSString+PPTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 18BBF1FA1F17734A006657F9 /* NSString+PPTextField.m */; };
+		18BBF1FE1F17734A006657F9 /* PPTextfield.m in Sources */ = {isa = PBXBuildFile; fileRef = 18BBF1FC1F17734A006657F9 /* PPTextfield.m */; };
+		18BBF2011F1773A3006657F9 /* ViewControllerB.m in Sources */ = {isa = PBXBuildFile; fileRef = 18BBF2001F1773A3006657F9 /* ViewControllerB.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +34,12 @@
 		183ABD341F171C4400FDC488 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		183ABD3A1F171D5900FDC488 /* UITextField+YFExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+YFExtension.h"; sourceTree = "<group>"; };
 		183ABD3B1F171D5900FDC488 /* UITextField+YFExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+YFExtension.m"; sourceTree = "<group>"; };
+		18BBF1F91F17734A006657F9 /* NSString+PPTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+PPTextField.h"; sourceTree = "<group>"; };
+		18BBF1FA1F17734A006657F9 /* NSString+PPTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+PPTextField.m"; sourceTree = "<group>"; };
+		18BBF1FB1F17734A006657F9 /* PPTextfield.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPTextfield.h; sourceTree = "<group>"; };
+		18BBF1FC1F17734A006657F9 /* PPTextfield.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPTextfield.m; sourceTree = "<group>"; };
+		18BBF1FF1F1773A3006657F9 /* ViewControllerB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewControllerB.h; sourceTree = "<group>"; };
+		18BBF2001F1773A3006657F9 /* ViewControllerB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewControllerB.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,8 +76,14 @@
 				183ABD241F171C4400FDC488 /* AppDelegate.m */,
 				183ABD261F171C4400FDC488 /* ViewController.h */,
 				183ABD271F171C4400FDC488 /* ViewController.m */,
+				18BBF1FF1F1773A3006657F9 /* ViewControllerB.h */,
+				18BBF2001F1773A3006657F9 /* ViewControllerB.m */,
 				183ABD3A1F171D5900FDC488 /* UITextField+YFExtension.h */,
 				183ABD3B1F171D5900FDC488 /* UITextField+YFExtension.m */,
+				18BBF1F91F17734A006657F9 /* NSString+PPTextField.h */,
+				18BBF1FA1F17734A006657F9 /* NSString+PPTextField.m */,
+				18BBF1FB1F17734A006657F9 /* PPTextfield.h */,
+				18BBF1FC1F17734A006657F9 /* PPTextfield.m */,
 				183ABD291F171C4400FDC488 /* Main.storyboard */,
 				183ABD2F1F171C4400FDC488 /* Assets.xcassets */,
 				183ABD311F171C4400FDC488 /* LaunchScreen.storyboard */,
@@ -162,6 +177,9 @@
 				183ABD281F171C4400FDC488 /* ViewController.m in Sources */,
 				183ABD2E1F171C4400FDC488 /* TextFieldCategory.xcdatamodeld in Sources */,
 				183ABD3C1F171D5900FDC488 /* UITextField+YFExtension.m in Sources */,
+				18BBF1FD1F17734A006657F9 /* NSString+PPTextField.m in Sources */,
+				18BBF1FE1F17734A006657F9 /* PPTextfield.m in Sources */,
+				18BBF2011F1773A3006657F9 /* ViewControllerB.m in Sources */,
 				183ABD251F171C4400FDC488 /* AppDelegate.m in Sources */,
 				183ABD221F171C4400FDC488 /* main.m in Sources */,
 			);
@@ -320,6 +338,7 @@
 				183ABD391F171C4400FDC488 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
