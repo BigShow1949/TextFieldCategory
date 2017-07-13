@@ -14,6 +14,7 @@
 		183ABD2E1F171C4400FDC488 /* TextFieldCategory.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 183ABD2C1F171C4400FDC488 /* TextFieldCategory.xcdatamodeld */; };
 		183ABD301F171C4400FDC488 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 183ABD2F1F171C4400FDC488 /* Assets.xcassets */; };
 		183ABD331F171C4400FDC488 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 183ABD311F171C4400FDC488 /* LaunchScreen.storyboard */; };
+		183ABD3C1F171D5900FDC488 /* UITextField+YFExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 183ABD3B1F171D5900FDC488 /* UITextField+YFExtension.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,8 @@
 		183ABD2F1F171C4400FDC488 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		183ABD321F171C4400FDC488 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		183ABD341F171C4400FDC488 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		183ABD3A1F171D5900FDC488 /* UITextField+YFExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+YFExtension.h"; sourceTree = "<group>"; };
+		183ABD3B1F171D5900FDC488 /* UITextField+YFExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+YFExtension.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +67,8 @@
 				183ABD241F171C4400FDC488 /* AppDelegate.m */,
 				183ABD261F171C4400FDC488 /* ViewController.h */,
 				183ABD271F171C4400FDC488 /* ViewController.m */,
+				183ABD3A1F171D5900FDC488 /* UITextField+YFExtension.h */,
+				183ABD3B1F171D5900FDC488 /* UITextField+YFExtension.m */,
 				183ABD291F171C4400FDC488 /* Main.storyboard */,
 				183ABD2F1F171C4400FDC488 /* Assets.xcassets */,
 				183ABD311F171C4400FDC488 /* LaunchScreen.storyboard */,
@@ -156,6 +161,7 @@
 			files = (
 				183ABD281F171C4400FDC488 /* ViewController.m in Sources */,
 				183ABD2E1F171C4400FDC488 /* TextFieldCategory.xcdatamodeld in Sources */,
+				183ABD3C1F171D5900FDC488 /* UITextField+YFExtension.m in Sources */,
 				183ABD251F171C4400FDC488 /* AppDelegate.m in Sources */,
 				183ABD221F171C4400FDC488 /* main.m in Sources */,
 			);
