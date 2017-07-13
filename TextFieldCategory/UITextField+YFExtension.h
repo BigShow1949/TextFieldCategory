@@ -18,6 +18,12 @@
 - (void)addAccessoryKeyboardCompletion:(void (^)())completionBlock;
 
 /**
+ *  是否点击"完成",键盘自动消失, 默认是YES
+ *
+ */
+@property (nonatomic, assign) BOOL isAutoHidden;
+
+/**
  *  抖动效果
  */
 - (void)shake;
@@ -29,5 +35,25 @@
  */
 - (void)addLeftPadding;
 - (void)addLeftPadding:(CGFloat)leftPadding;
+
+/**
+ *  添加左边图片 注意:调用此方法, self要有frame
+ *
+ *  @param imgName 图片名字
+ *  @param imgWH   图片宽高(应该小于self的宽高)
+ */
+- (void)addImg:(NSString *)imgName imgHW:(CGFloat)imgWH;
+
+
+/**
+ *  限制最大输入长度
+ */
+@property (assign, nonatomic) NSInteger maxLength;
+
+/**
+ *  只输入数字
+ */
+@property(nonatomic,assign)BOOL isOnlyNumber;
+
 
 @end

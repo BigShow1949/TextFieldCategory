@@ -18,13 +18,21 @@ typedef void (^Completion)();
 
 #pragma mark - 附件键盘
 static char const *completionKey = "comKey";
+static char const *isAutoHiddenKey = "isAutoHidden";
 
 - (Completion)completionBlock {
     return objc_getAssociatedObject(self, completionKey);
 }
 
+- (BOOL)isAutoHidden {
+    return objc_getAssociatedObject(self, isAutoHiddenKey);
+}
+
 - (void)setCompletionBlock:(Completion)completionBlock {
     objc_setAssociatedObject(self, completionKey, completionBlock, OBJC_ASSOCIATION_COPY_NONATOMIC);
+}
+- (void)setIsAutoHidden:(BOOL)isAutoHidden {
+    objc_setAssociatedObject(self, isAutoHiddenKey, @(isAutoHidden), OBJC_ASSOCIATION_ASSIGN);
 }
 
 - (void)addAccessoryKeyboardCompletion:(void (^)())completionBlock {
@@ -46,7 +54,10 @@ static char const *completionKey = "comKey";
     if (self.completionBlock) {
         self.completionBlock();
     }
-    // 点击"完成"键盘默认退出
+    // 点击"完成"键盘退出
+    if (self.isAutoHidden) {
+        [self resignFirstResponder];
+    }
 }
 
 #pragma mark - 抖动效果
@@ -108,9 +119,7 @@ static char const *completionKey = "comKey";
             if (self.completionBlock) {
                 self.completionBlock();
             }
-            
         }else {
-            
             [self _shake:(times - 1)
                direction:direction * -1
             currentTimes:current + 1
@@ -133,5 +142,75 @@ static char const *completionKey = "comKey";
 - (void)addLeftPadding:(CGFloat)leftPadding {
     [self setValue:[NSNumber numberWithInt:leftPadding] forKey:@"paddingLeft"];
 }
+
+#pragma mark - 添加左边图片
+- (void)addImg:(NSString *)imgName imgHW:(CGFloat)imgWH {
+    
+    //文本框左视图
+    CGFloat leftViewWH = self.frame.size.height;
+    UIView *leftView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, leftViewWH, leftViewWH)];
+    leftView.backgroundColor = [UIColor clearColor];
+    //添加图片
+    CGFloat imgY = (leftViewWH - imgWH)/2;
+    CGFloat imgX = (leftViewWH - imgWH)/2;
+    UIImageView *image=[[UIImageView alloc] initWithFrame:CGRectMake(imgX, imgY, imgWH, imgWH)];
+    image.image = [UIImage imageNamed:imgName];
+    [leftView addSubview:image];
+    self.leftView=leftView;
+    self.leftViewMode = UITextFieldViewModeAlways;
+}
+
+#pragma mark - 输入限制
+static char const *maxLengthKey = "maxLength";
+
+- (NSInteger)maxLength {
+    NSNumber *num = objc_getAssociatedObject(self, maxLengthKey);
+    return num.integerValue;
+}
+
+- (void)setMaxLength:(NSInteger)maxLength {
+    objc_setAssociatedObject(self, maxLengthKey, @(maxLength), OBJC_ASSOCIATION_ASSIGN);
+    [self addTarget:self action:@selector(handleTextFieldTextDidChangeAction) forControlEvents:UIControlEventEditingChanged];
+}
+
+- (void)handleTextFieldTextDidChangeAction
+{
+    
+    NSString *toBeginString = self.text;
+    // 获取高亮部分
+    // selectRange 如果是nil则说明现在没有未选中字符,可以计算文字长度
+    UITextRange *selectRange = [self markedTextRange];
+    UITextPosition *position = [self positionFromPosition:selectRange.start offset:0];
+    NSLog(@"selectRange = %@", selectRange);
+    NSLog(@"position = %@", position);
+    NSLog(@"text = %@", self.text);
+    // 没有高亮选择的字，则对已输入的文字进行字数统计和限制
+    // 在 iOS 7下, position 对象总是不为 nil
+    if ((!position || !selectRange) && (self.maxLength > 0 && toBeginString.length > self.maxLength && [self isFirstResponder]))
+    {
+        NSRange rangeIndex = [toBeginString rangeOfComposedCharacterSequenceAtIndex:self.maxLength];
+        NSLog(@"location:%zd, length:%zd", rangeIndex.location, rangeIndex.length);
+        if (rangeIndex.length == 1)
+        {
+            self.text = [toBeginString substringToIndex:self.maxLength];
+        }
+        else
+        {
+            NSRange tempRange = [toBeginString rangeOfComposedCharacterSequencesForRange:NSMakeRange(0, self.maxLength)];
+            NSInteger tempLength;
+            if (tempRange.length > self.maxLength)
+            {
+                tempLength = tempRange.length - rangeIndex.length;
+            }
+            else
+            {
+                tempLength = tempRange.length;
+            }
+            self.text = [toBeginString substringWithRange:NSMakeRange(0, tempLength)];
+        }
+    }
+}
+
+
 
 @end
